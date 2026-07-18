@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dsglfglnnh5uv"]
+
+[ext_resource type="Script" uid="uid://brv0a44exij4i" path="res://scripts/Core/Units/PlayerCharacters/Witch.cs" id="1_ejrlg"]
+[ext_resource type="Texture2D" uid="uid://dauhk27bqi7o5" path="res://assets/characters/playerCharacters/witch-idle-spritesheet-Sheet.png" id="1_exagm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btoe6"]
+radius = 45.0
+height = 130.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejrlg"]
+atlas = ExtResource("1_exagm")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynj42"]
+atlas = ExtResource("1_exagm")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy2ow"]
+atlas = ExtResource("1_exagm")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i04al"]
+atlas = ExtResource("1_exagm")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6neo8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejrlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynj42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy2ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i04al")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=702029176 groups=["Target"]]
+position = Vector2(3, 72)
+script = ExtResource("1_ejrlg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=43798056]
+shape = SubResource("CapsuleShape2D_btoe6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1536264698]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6neo8")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="ForwardRay" type="RayCast2D" parent="." unique_id=1130253565]
+position = Vector2(25, 17)
+target_position = Vector2(57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="BackwardRay" type="RayCast2D" parent="." unique_id=1283697671]
+target_position = Vector2(-57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="UpwardRay" type="RayCast2D" parent="." unique_id=408429538]
+target_position = Vector2(0, -50)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="DownwardRay" type="RayCast2D" parent="." unique_id=1499306325]
+collision_mask = 2
+collide_with_areas = true

@@ -1,17 +1,20 @@
-using Godot;
 using System;
+using Godot;
 
-
-public partial class PlayerNecro : CharacterBody2D
+public partial class TargetableCharacter : CharacterBody2D
 {
-	[Export]
-	public int Speed {get; set;} = 300;
-    [Export]
-    public int MaxHp {get; set;} = 300;
-    [Export]
-    public int CurrentHP;
+    public event Action<TargetableCharacter> Clicked;
 
-	public Vector2 ScreenSize;
+    [Export]
+    public int Speed {get; set;} = 300;
+    [Export]
+    public int MaxHp {get; set;}
+    [Export]
+    public int CurrentHp;
+
+    Boolean isAlly;
+
+    public Vector2 ScreenSize;
 
     private AnimatedSprite2D _anim;
 
@@ -20,15 +23,16 @@ public partial class PlayerNecro : CharacterBody2D
     private RayCast2D _upwardRay;
     private RayCast2D _downwardRay;
 
-	public override void _Ready()
+    public String Portrait;
+
+    public override void _Ready()
 {
     _anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-    ScreenSize = GetViewportRect().Size; //?
     _forwardRay = GetNode<RayCast2D>("ForwardRay");
     _backwardRay = GetNode<RayCast2D>("BackwardRay");
     _upwardRay = GetNode<RayCast2D>("UpwardRay");
     _downwardRay = GetNode<RayCast2D>("DownwardRay");
-    CurrentHP = MaxHp;
+    CurrentHp = MaxHp;
 }
 
 	public override void _Process(double delta)
@@ -39,10 +43,6 @@ public partial class PlayerNecro : CharacterBody2D
 public  void PlayIdleAnimation()
     {
         _anim.Play("idle");
-    }
-    public void StopIdleAnimation()
-    {
-        _anim.Stop();
     }
 
     public void PlayAttackingAnimation()
@@ -64,5 +64,18 @@ public  void PlayIdleAnimation()
     {
         _anim.Play("moving");
     }
-	}
 
+    public override void _InputEvent(
+    Viewport viewport,
+    InputEvent @event,
+    int shapeIdx)
+{
+    if (@event is InputEventMouseButton mouse &&
+        mouse.Pressed &&
+        mouse.ButtonIndex == MouseButton.Left)
+    {
+        Clicked?.Invoke(this);
+        GD.Print("Input event received");
+    }
+}
+}

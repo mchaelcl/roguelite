@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnemyPortrait : TextureRect
+public partial class TargetPortrait : TextureRect
 {
 	public PlayerTarget _playerTarget;
 	
@@ -21,8 +21,8 @@ public partial class EnemyPortrait : TextureRect
 		
 	}
 
-	private void OnTargetChanged(Enemy enemy)
+	private void OnTargetChanged(TargetableCharacter enemy)
 	{
-		Texture = GD.Load<Texture2D>(enemy.EnemyPortrait);
+		Texture = GD.Load<Texture2D>(enemy.Portrait);
 	}
 }

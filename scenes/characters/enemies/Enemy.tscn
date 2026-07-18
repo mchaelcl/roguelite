@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dsshg0nj571jw"]
+
+[ext_resource type="Texture2D" uid="uid://ccr7vdmbmv4qv" path="res://assets/characters/enemies/bird-Sheet.png" id="1_3nmwy"]
+[ext_resource type="Script" uid="uid://bt66ipfmaloxh" path="res://scripts/Core/Units/Enemies/Bird.cs" id="1_cisda"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4rkwe"]
+radius = 34.0
+height = 92.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvw1l"]
+atlas = ExtResource("1_3nmwy")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8haw"]
+atlas = ExtResource("1_3nmwy")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6xs4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvw1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8haw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1928379612 groups=["Enemies"]]
+input_pickable = true
+script = ExtResource("1_cisda")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1949116412]
+shape = SubResource("CapsuleShape2D_4rkwe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1301514075]
+texture_filter = 1
+position = Vector2(1, -14)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6xs4n")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="ForwardRay" type="RayCast2D" parent="." unique_id=1169647476]
+position = Vector2(25, 17)
+target_position = Vector2(57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="BackwardRay" type="RayCast2D" parent="." unique_id=810175348]
+target_position = Vector2(-57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="UpwardRay" type="RayCast2D" parent="." unique_id=151488445]
+target_position = Vector2(0, -50)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="DownwardRay" type="RayCast2D" parent="." unique_id=206230788]
+collision_mask = 2
+collide_with_areas = true

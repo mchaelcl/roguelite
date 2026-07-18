@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://cgj000gm6mrut"]
+
+[ext_resource type="Script" uid="uid://btmt2ejwmqe6m" path="res://scripts/Core/Units/PlayerCharacters/Necromancer.cs" id="1_3qa2y"]
+[ext_resource type="Texture2D" uid="uid://cqk634hnb5wk3" path="res://assets/characters/playerCharacters/necro-idle-Sheet-export.png" id="1_sajbd"]
+[ext_resource type="Texture2D" uid="uid://bv486tklioong" path="res://assets/characters/playerCharacters/necro-attacking-state-Sheet.png" id="2_3qa2y"]
+[ext_resource type="Texture2D" uid="uid://dx7jja2csi4yb" path="res://assets/characters/playerCharacters/necroright-Sheet.png" id="3_yh3t6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bs2gt"]
+radius = 44.0
+height = 112.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jokes"]
+atlas = ExtResource("2_3qa2y")
+region = Rect2(0, 0, 64, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whr1o"]
+atlas = ExtResource("2_3qa2y")
+region = Rect2(64, 0, 64, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs2gt"]
+atlas = ExtResource("1_sajbd")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh3t6"]
+atlas = ExtResource("1_sajbd")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qa2y"]
+atlas = ExtResource("1_sajbd")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o14dr"]
+atlas = ExtResource("1_sajbd")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h482a"]
+atlas = ExtResource("3_yh3t6")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usd11"]
+atlas = ExtResource("3_yh3t6")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp8x2"]
+atlas = ExtResource("3_yh3t6")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbvkb"]
+atlas = ExtResource("3_yh3t6")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04jbr"]
+atlas = ExtResource("3_yh3t6")
+region = Rect2(192, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yh3t6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jokes")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whr1o")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs2gt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh3t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qa2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o14dr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h482a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usd11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp8x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbvkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04jbr")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 4.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=540747880 groups=["Target"]]
+position = Vector2(-1, -3)
+script = ExtResource("1_3qa2y")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1841290057]
+shape = SubResource("CapsuleShape2D_bs2gt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1189868872]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_yh3t6")
+animation = &"moving"
+
+[node name="ForwardRay" type="RayCast2D" parent="." unique_id=623243008]
+position = Vector2(25, 17)
+target_position = Vector2(57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="BackwardRay" type="RayCast2D" parent="." unique_id=1361394306]
+target_position = Vector2(-57, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="UpwardRay" type="RayCast2D" parent="." unique_id=54218324]
+target_position = Vector2(0, -50)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="DownwardRay" type="RayCast2D" parent="." unique_id=1061114278]
+collision_mask = 2
+collide_with_areas = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2143008273]
+offset_left = -149.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0

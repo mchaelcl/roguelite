@@ -4,20 +4,20 @@ using Godot;
 public partial class PlayerTarget : Node
 {
 
-    public event Action<Enemy> TargetChanged;
-    public Enemy CurrentTarget;
+    public event Action<TargetableCharacter> TargetChanged;
+    public CharacterBody2D CurrentTarget;
     
     public override void _Ready()
     {
 
         GD.Print("PlayerTarget ready");
-        foreach (Node node in GetTree().GetNodesInGroup("Enemies"))
+        foreach (Node node in GetTree().GetNodesInGroup("Target"))
         {
-            Enemy enemy = node as Enemy;
+            TargetableCharacter target = node as TargetableCharacter;
 
-            if (enemy != null)
+            if (target != null)
             {
-                enemy.Clicked += OnEnemyClicked;
+                target.Clicked += OnTargetClicked;
             }
         }
         GD.Print("Enemies added");
@@ -28,13 +28,13 @@ public partial class PlayerTarget : Node
        
     }
 
-    public void OnEnemyClicked(Enemy enemy)
+    public void OnTargetClicked(TargetableCharacter target)
     {
-        CurrentTarget = enemy;
+        CurrentTarget = target;
 
-        TargetChanged?.Invoke(enemy);
+        TargetChanged?.Invoke(target);
 
-        GD.Print($"Target selected: {enemy.EnemyName}");
+        GD.Print($"Target selected: {target.Name}");
     }
 
 

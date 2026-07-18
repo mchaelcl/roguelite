@@ -6,12 +6,12 @@ public partial class MovingState : State
     [Export]
 	public int Speed {get; set;} = 300;
 
-    private PlayerNecro _player;
+    private TargetableCharacter _player;
     private RayCast2D _forwardRay;
     private RayCast2D _backwardRay;
     private RayCast2D _upwardRay;
     private RayCast2D _downwardRay;
-    public Vector2 ScreenSize;
+    
 
     public override void _Ready()
     {
@@ -58,33 +58,40 @@ public partial class MovingState : State
     if (velocity.Length() > 0)
     {
         velocity = velocity.Normalized() * Speed;
+        _player.PlayMovingAnimation();
     }
     else
-    {
-        fsm.TransitionTo("idle");
-    }
+        {
+            _player.PlayIdleAnimation();
+        }
+    
+  
     
     _player.Position += velocity * (float)delta;
     _player.Position = new Vector2(
-    x: Mathf.Clamp(_player.Position.X, 0, ScreenSize.X),
-    y: Mathf.Clamp(_player.Position.Y, 0, ScreenSize.Y));
+    x: Mathf.Clamp(_player.Position.X, 0, _player.ScreenSize.X),
+    y: Mathf.Clamp(_player.Position.Y, 0, _player.ScreenSize.Y));
+
+      if (velocity.X == 0 && velocity.Y == 0)
+    {
+        fsm.TransitionTo("idle");
+    }
 
     }
 
     public override void Enter()
     {
-        _player = GetNode<PlayerNecro>("/root/Level/Necro");
-        _player.PlayMovingAnimation();
+        _player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
         GD.Print("Entering moving state");
-        _forwardRay = GetNode<RayCast2D>("/root/Level/Necro/ForwardRay");
-        _backwardRay = GetNode<RayCast2D>("/root/Level/Necro/BackwardRay");
-        _upwardRay = GetNode<RayCast2D>("/root/Level/Necro/UpwardRay");
-        _downwardRay = GetNode<RayCast2D>("/root/Level/Necro/DownwardRay");
+        _forwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/ForwardRay");
+        _backwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/BackwardRay");
+        _upwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/UpwardRay");
+        _downwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/DownwardRay");
     }
 
     public override void Exit()
     {
-        _player = GetNode<PlayerNecro>("/root/Level/Necro");
+        _player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
         _player.StopAnimation();
         GD.Print("Leaving moving state");
     }
