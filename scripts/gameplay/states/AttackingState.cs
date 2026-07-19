@@ -5,7 +5,7 @@ public partial class AttackingState : State
 
 
 {
-	private Necromancer _player;
+	private TargetableCharacter _player;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,14 +28,14 @@ public partial class AttackingState : State
 	public override void Enter()
 	{
 		GD.Print("Entering attack state");
-		_player = GetNode<Necromancer>("/root/Level/Necromancer");
+		_player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
 		_player.PlayAttackingAnimation();
 		GD.Print("Playing attack animation");
 	}
 
     public override void Exit()
     {
-		_player = GetNode<Necromancer>("/root/Level/Necromancer");
+		_player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
 		_player.StopAnimation(); 
 		GD.Print("Leaving attacking");
 	}   

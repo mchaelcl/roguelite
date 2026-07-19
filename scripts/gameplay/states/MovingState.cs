@@ -7,6 +7,7 @@ public partial class MovingState : State
 	public int Speed {get; set;} = 300;
 
     private TargetableCharacter _player;
+    
     private RayCast2D _forwardRay;
     private RayCast2D _backwardRay;
     private RayCast2D _upwardRay;
@@ -15,7 +16,7 @@ public partial class MovingState : State
 
     public override void _Ready()
     {
-        GD.Print("Entering moving state");
+        GD.Print("Moving state ready");
     }
 
         public override void _Process(double delta)
@@ -82,7 +83,7 @@ public partial class MovingState : State
     public override void Enter()
     {
         _player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
-        GD.Print("Entering moving state");
+        GD.Print("Transition to moving state");
         _forwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/ForwardRay");
         _backwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/BackwardRay");
         _upwardRay = GetNode<RayCast2D>("/root/Level/Necromancer/UpwardRay");

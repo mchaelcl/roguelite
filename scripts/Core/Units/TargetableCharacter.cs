@@ -12,7 +12,7 @@ public partial class TargetableCharacter : CharacterBody2D
     [Export]
     public int CurrentHp;
 
-    Boolean isAlly;
+    public Boolean IsAlly;
 
     public Vector2 ScreenSize;
 

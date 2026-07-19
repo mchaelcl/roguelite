@@ -3,8 +3,7 @@ using System;
 
 public partial class IdleState : State
 {
-	private Necromancer _player;
-	private AnimatedSprite2D _anim;
+	private TargetableCharacter _player;
 	
 	public override void _Ready()
 	{
@@ -27,13 +26,13 @@ public partial class IdleState : State
     public override void Enter()
     {
 		GD.Print("Transition to idle state");
-        _player = GetNode<Necromancer>("/root/Level/Necromancer");
+        _player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
 		_player.PlayIdleAnimation();
     }
 
     public override void Exit()
     {
-		_player = GetNode<Necromancer>("/root/Level/Necromancer");
+		_player = GetNode<TargetableCharacter>("/root/Level/Necromancer");
 		_player.StopAnimation();
 		GD.Print("Leaving idle");
     }
