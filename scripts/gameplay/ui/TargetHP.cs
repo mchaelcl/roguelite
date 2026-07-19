@@ -3,15 +3,15 @@ using System;
 
 public partial class TargetHP : Label
 {
-private TargetableCharacter _target;	
+private PlayerTarget _playerTarget;	
 public override void _Ready()
 	{
-		_target = GetNode<TargetableCharacter>("/root/Level/Necromancer");
+		_playerTarget = GetNode<PlayerTarget>("../PlayerTarget");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Text = $"HP:{_target.CurrentHp}";
+		// Text = $"HP:{_playerTarget.CurrentHp}";
 	}
 }

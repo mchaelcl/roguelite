@@ -21,8 +21,8 @@ public partial class TargetPortrait : TextureRect
 		
 	}
 
-	private void OnTargetChanged(TargetableCharacter enemy)
+	private void OnTargetChanged(TargetableCharacter playerTarget)
 	{
-		Texture = GD.Load<Texture2D>(enemy.Portrait);
+		Texture = GD.Load<Texture2D>(playerTarget.Portrait);
 	}
 }

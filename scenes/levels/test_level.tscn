@@ -1225,16 +1225,16 @@ size = Vector2(154, 245)
 [node name="Level" type="Node2D" unique_id=774607255]
 position = Vector2(0, 2)
 
-[node name="Enemy" parent="." unique_id=1928379612 instance=ExtResource("4_v45ci")]
-position = Vector2(411, 466)
-
-[node name="Necromancer" parent="." unique_id=540747880 instance=ExtResource("2_yautc")]
+[node name="Necromancer" parent="." unique_id=540747880 groups=["TargetableCharacter"] instance=ExtResource("2_yautc")]
 z_index = 1
 position = Vector2(130, 396)
 
 [node name="Witch" parent="." unique_id=702029176 instance=ExtResource("3_fr1um")]
 z_index = 1
 position = Vector2(133, 524)
+
+[node name="Enemy" parent="." unique_id=1928379612 instance=ExtResource("4_v45ci")]
+position = Vector2(411, 466)
 
 [node name="Background" type="Node" parent="." unique_id=936795795]
 
@@ -1299,5 +1299,3 @@ script = ExtResource("11_jmx14")
 
 [node name="moving" type="Node" parent="FiniteStateMachine" unique_id=1351520573]
 script = ExtResource("12_eaa0b")
-
-[node name="PlayerSpawn1" type="Node2D" parent="." unique_id=766512580]

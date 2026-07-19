@@ -43,8 +43,8 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=702029176 groups=["Target"]]
-position = Vector2(3, 72)
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=702029176 groups=["TargetableCharacter"]]
+input_pickable = true
 script = ExtResource("1_ejrlg")
 metadata/_edit_group_ = true
 

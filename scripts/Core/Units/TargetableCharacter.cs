@@ -10,9 +10,9 @@ public partial class TargetableCharacter : CharacterBody2D
     [Export]
     public int MaxHp {get; set;}
     [Export]
-    public int CurrentHp;
+    public int CurrentHp { get; private set; }
 
-    public Boolean IsAlly;
+    public bool IsAlly;
 
     public Vector2 ScreenSize;
 
@@ -23,7 +23,7 @@ public partial class TargetableCharacter : CharacterBody2D
     private RayCast2D _upwardRay;
     private RayCast2D _downwardRay;
 
-    public String Portrait;
+    public string Portrait;
 
     public override void _Ready()
 {
@@ -32,7 +32,7 @@ public partial class TargetableCharacter : CharacterBody2D
     _backwardRay = GetNode<RayCast2D>("BackwardRay");
     _upwardRay = GetNode<RayCast2D>("UpwardRay");
     _downwardRay = GetNode<RayCast2D>("DownwardRay");
-    CurrentHp = MaxHp;
+    ScreenSize = GetViewportRect().Size;
 }
 
 	public override void _Process(double delta)
@@ -48,11 +48,6 @@ public  void PlayIdleAnimation()
     public void PlayAttackingAnimation()
     {
         _anim.Play("attacking");
-    }
-
-     public void PlayMovingingAnimation()
-    {
-        _anim.Play("moving");
     }
 
     public void StopAnimation()
